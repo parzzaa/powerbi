@@ -1,0 +1,3445 @@
+{
+  "compatibilityLevel": 1567,
+  "model": {
+    "annotations": [
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"Salon1\",\"Salon2\",\"Miz\",\"MizGroup\",\"Branch\",\"The D Project Fereshte - 7 21 2024\",\"Errors in Salon1\"]"
+      },
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "1"
+      },
+      {
+        "name": "PBIDesktopVersion",
+        "value": "2.131.1203.0 (24.07)"
+      },
+      {
+        "name": "PBI_ProTooling",
+        "value": "[\"DevMode\"]"
+      }
+    ],
+    "culture": "en-US",
+    "cultures": [
+      {
+        "name": "en-US",
+        "linguisticMetadata": {
+          "content": {
+            "Language": "en-US",
+            "Version": "1.0.0"
+          },
+          "contentType": "json"
+        }
+      }
+    ],
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "expressions": [
+      {
+        "name": "Errors in Salon1",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "expression": [
+          "let",
+          "Source = Salon1,",
+          "  #\"Detected Type Mismatches\" = let",
+          "    tableWithOnlyPrimitiveTypes = Table.SelectColumns(Source, Table.ColumnsOfType(Source, {type nullable number, type nullable text, type nullable logical, type nullable date, type nullable datetime, type nullable datetimezone, type nullable time, type nullable duration})),",
+          "    recordTypeFields = Type.RecordFields(Type.TableRow(Value.Type(tableWithOnlyPrimitiveTypes))),",
+          "    fieldNames = Record.FieldNames(recordTypeFields),",
+          "    fieldTypes = List.Transform(Record.ToList(recordTypeFields), each [Type]),",
+          "    pairs = List.Transform(List.Positions(fieldNames), (i) => {fieldNames{i}, (v) => if v = null or Value.Is(v, fieldTypes{i}) then v else error [Message = \"The type of the value does not match the type of the column.\", Detail = v], fieldTypes{i}})",
+          "in",
+          "    Table.TransformColumns(Source, pairs),",
+          "  #\"Added Index\" = Table.AddIndexColumn(#\"Detected Type Mismatches\", \"Row Number\" ,1),",
+          "  #\"Kept Errors\" = Table.SelectRowsWithErrors(#\"Added Index\", {\"Num\", \"سال\", \"ماه\", \"روز\", \"Price\", \"Name\", \"Takhfif\", \"Flag\", \"Tim\", \"CodeOp\", \"NameOp\", \"Print\", \"Takh\", \"Shift\", \"Toz\", \"Address\", \"Tel\", \"NumRoz\", \"NameOP1\", \"CodeOP1\", \"DarsadService\", \"Service\", \"CodeG\", \"NameG\", \"FoodType\", \"Pard\", \"NamePard\", \"Naghd\", \"PrintAsh\", \"Cash\", \"روز هفته\", \"Name1\", \"Bed\", \"Bes\", \"Code\", \"TarYYS\", \"TarMMS\", \"TarDDS\", \"TimeS\", \"Beyaneh\", \"AccNum\", \"Tip\", \"Maliat\", \"MaliatDarsad\", \"Kansel\", \"NameMiz\", \"Serv\", \"Nafarat\", \"PricePey\", \"MaliatPey\", \"RezerveCode\", \"RezerveName\", \"Amount\", \"RezervePrice\", \"RezerveDarsad\", \"RezerveTakh\", \"Gerd\", \"EditFlag\", \"LastEditName\", \"TimeTas\", \"TozPayment\", \"TransactionNo\", \"ErrorCodePay\", \"ErrorMessagePay\", \"MerchantIDPay\", \"TerminalIDPay\", \"USSD\", \"فروش ناخالص\", \"PardPrice1\", \"PardPrice2\", \"PardPrice3\", \"PardPrice4\", \"BonPrint\", \"Pard1\", \"NamePard1\", \"Pard2\", \"NamePard2\", \"Pard3\", \"NamePard3\", \"Pard4\", \"NamePard4\", \"ReplyFlag\", \"Shekayat\", \"BranchCode\", \"Bargasht\", \"PrintIndex\", \"ID\", \"NameOpCansel\", \"SefareshNumber\", \"ClubFlag\", \"CodeRserve\", \"CreditPersent\", \"CreditUsedPersent\", \"CreditUsedRial\", \"ClubCardNo\", \"Credit\", \"UsedCredit\", \"LastPrintNameOp\", \"LastPrintAshNameOp\", \"ClubUseCreditApiId\", \"PrintKitchenTime\", \"PrintTime\", \"OrginalTime\", \"SepidzReserveId\", \"inno\", \"Takhfifan\", \"Merged\", \"Date\", \"Merged.1\"}),",
+          "  #\"Reordered Columns\" = Table.ReorderColumns(#\"Kept Errors\", {\"Row Number\", \"Num\", \"سال\", \"ماه\", \"روز\", \"Price\", \"Name\", \"Takhfif\", \"Flag\", \"Tim\", \"CodeOp\", \"NameOp\", \"Print\", \"Takh\", \"Shift\", \"Toz\", \"Address\", \"Tel\", \"NumRoz\", \"NameOP1\", \"CodeOP1\", \"DarsadService\", \"Service\", \"CodeG\", \"NameG\", \"FoodType\", \"Pard\", \"NamePard\", \"Naghd\", \"PrintAsh\", \"Cash\", \"روز هفته\", \"Name1\", \"Bed\", \"Bes\", \"Code\", \"TarYYS\", \"TarMMS\", \"TarDDS\", \"TimeS\", \"Beyaneh\", \"AccNum\", \"Tip\", \"Maliat\", \"MaliatDarsad\", \"Kansel\", \"NameMiz\", \"Serv\", \"Nafarat\", \"PricePey\", \"MaliatPey\", \"RezerveCode\", \"RezerveName\", \"Amount\", \"RezervePrice\", \"RezerveDarsad\", \"RezerveTakh\", \"Gerd\", \"EditFlag\", \"LastEditName\", \"TimeTas\", \"TozPayment\", \"TransactionNo\", \"ErrorCodePay\", \"ErrorMessagePay\", \"MerchantIDPay\", \"TerminalIDPay\", \"USSD\", \"فروش ناخالص\", \"PardPrice1\", \"PardPrice2\", \"PardPrice3\", \"PardPrice4\", \"BonPrint\", \"Pard1\", \"NamePard1\", \"Pard2\", \"NamePard2\", \"Pard3\", \"NamePard3\", \"Pard4\", \"NamePard4\", \"ReplyFlag\", \"Shekayat\", \"BranchCode\", \"Bargasht\", \"PrintIndex\", \"ID\", \"NameOpCansel\", \"SefareshNumber\", \"ClubFlag\", \"CodeRserve\", \"CreditPersent\", \"CreditUsedPersent\", \"CreditUsedRial\", \"ClubCardNo\", \"Credit\", \"UsedCredit\", \"LastPrintNameOp\", \"LastPrintAshNameOp\", \"ClubUseCreditApiId\", \"PrintKitchenTime\", \"PrintTime\", \"OrginalTime\", \"SepidzReserveId\", \"inno\", \"Takhfifan\", \"Merged\", \"Date\", \"Merged.1\"})",
+          "in",
+          "  #\"Reordered Columns\""
+        ],
+        "kind": "m",
+        "lineageTag": "1d57c08f-e36e-43b3-9802-e0942a7d9798",
+        "queryGroup": "Query Errors - 8/16/2024 9:17:52 PM"
+      }
+    ],
+    "queryGroups": [
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "0"
+          }
+        ],
+        "folder": "لیست کالایی شعب"
+      },
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "1"
+          }
+        ],
+        "description": "Errors in queries that were loaded on 8/16/2024 9:17:52 PM.",
+        "folder": "Query Errors - 8/16/2024 9:17:52 PM"
+      }
+    ],
+    "relationships": [
+      {
+        "name": "db7fe471-b515-43aa-90e0-a6047b67c0b4",
+        "fromColumn": "Date",
+        "fromTable": "Salon1",
+        "joinOnDateBehavior": "datePartOnly",
+        "toColumn": "Date",
+        "toTable": "LocalDateTable_ba7e36d2-1ac1-4bb4-aa84-c811f30f5245"
+      },
+      {
+        "name": "72db0a5d-5764-4691-fbbd-33cf6dfd4c1b",
+        "fromColumn": "Merged",
+        "fromTable": "Salon2",
+        "toColumn": "Merged",
+        "toTable": "Salon1"
+      },
+      {
+        "name": "14e8bf5a-42cf-05fa-35b4-baa899ff0718",
+        "crossFilteringBehavior": "bothDirections",
+        "fromCardinality": "one",
+        "fromColumn": "Merged",
+        "fromTable": "MizGroup",
+        "toColumn": "Merged",
+        "toTable": "Miz"
+      },
+      {
+        "name": "f41aaa71-713f-a869-8085-4be9eda431b1",
+        "fromColumn": "BranchCode",
+        "fromTable": "Salon1",
+        "toColumn": "BranchCode",
+        "toTable": "Branch"
+      },
+      {
+        "name": "ac8a91f1-5908-f505-9076-825a3892ac85",
+        "fromColumn": "Code",
+        "fromTable": "Salon2",
+        "toColumn": "كد كالا",
+        "toTable": "The D Project Fereshte - 7 21 2024"
+      }
+    ],
+    "sourceQueryCulture": "en-US",
+    "tables": [
+      {
+        "name": "Salon1",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Num",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "034a6238-2ba8-4da1-96fc-07fc02e34a25",
+            "sourceColumn": "Num",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "سال",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "69d9ea81-85b0-4469-b91b-15f56e2769fe",
+            "sourceColumn": "سال",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ماه",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "f3e12a6f-af84-4777-9098-c9ecba08b470",
+            "sourceColumn": "ماه",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "روز",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "dc5cc9c5-2e5f-4887-9556-9810c7f87e96",
+            "sourceColumn": "روز",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Price",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "d90a1d1b-1710-449f-99cc-2ee163a3339d",
+            "sourceColumn": "Price",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "94d77236-fd47-4e71-b39c-4cdb7ce31080",
+            "sourceColumn": "Name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Takhfif",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "acff1326-b24a-41eb-99bd-d3ddf3c88202",
+            "sourceColumn": "Takhfif",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Flag",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "b9a734d6-2819-4c60-bf70-5bc22389bcaa",
+            "sourceColumn": "Flag",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Tim",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "471d5f8b-5503-4470-9fa7-422dd356817b",
+            "sourceColumn": "Tim",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CodeOp",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "b04aad29-5610-46dc-9e42-99baebd51c11",
+            "sourceColumn": "CodeOp",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "NameOp",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "c3a4292c-5cb9-455e-918a-f8664911ebf7",
+            "sourceColumn": "NameOp",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Print",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "66e9607f-be02-4198-bf42-e7c70a3baa5b",
+            "sourceColumn": "Print",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Takh",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "8abcb656-3e20-4db2-87eb-ae69b4ae8eb8",
+            "sourceColumn": "Takh",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Shift",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "f37f7766-901c-4e42-9d93-90255be95a60",
+            "sourceColumn": "Shift",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Toz",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "affbd119-e7c8-4cc2-8539-539f1167b860",
+            "sourceColumn": "Toz",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Address",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "cc9c2f12-43d0-456a-96a3-7e3f29dad502",
+            "sourceColumn": "Address",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Tel",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "47b3cda6-f7d2-4b68-8b16-89f0cec43ca0",
+            "sourceColumn": "Tel",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "NumRoz",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "1df614f2-f844-46b9-adb9-65848b2a497e",
+            "sourceColumn": "NumRoz",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "NameOP1",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "63b4110d-53e5-4366-83f8-0ebb3bb94914",
+            "sourceColumn": "NameOP1",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CodeOP1",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "945800f6-cdc4-463c-976f-9392a22eb1a2",
+            "sourceColumn": "CodeOP1",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "DarsadService",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "3c16f0f1-f9e4-4774-a094-be89c6ce62eb",
+            "sourceColumn": "DarsadService",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Service",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "f537df1e-8c49-41ae-a838-9468bedd89bc",
+            "sourceColumn": "Service",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "CodeG",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "1de3ab5b-7e14-42aa-8c46-6c90dcbdc73e",
+            "sourceColumn": "CodeG",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "NameG",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "953b0f3b-80fb-4849-9c54-f199c9714d05",
+            "sourceColumn": "NameG",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "FoodType",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "7e1805c6-b4ce-4954-b153-afc757fb7a5b",
+            "sourceColumn": "FoodType",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Pard",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "92b9f65e-1525-478a-9324-afb3da29e122",
+            "sourceColumn": "Pard",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "NamePard",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "0b3e9aca-47e8-4c95-920c-715f64e833ef",
+            "sourceColumn": "NamePard",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Naghd",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "0c549820-1f8c-4bf4-a8de-819dba6b7c5b",
+            "sourceColumn": "Naghd",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "PrintAsh",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "42d7e908-7f74-4c44-ae8e-2f979dca6417",
+            "sourceColumn": "PrintAsh",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Cash",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "877ef94a-1599-4c1a-8903-8d4fd4d6d847",
+            "sourceColumn": "Cash",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "روز هفته",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "017689fb-9700-483b-af98-1afae3ed0be4",
+            "sourceColumn": "روز هفته",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Name1",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "c4ba0c27-9151-40b3-8b29-a936b62cd0fa",
+            "sourceColumn": "Name1",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Bed",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "75af6bdf-9c09-4a44-8658-e3b40120ddee",
+            "sourceColumn": "Bed",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Bes",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "24c00aab-b049-4c0a-a301-dcacf7d5b939",
+            "sourceColumn": "Bes",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Code",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "82b7e4ef-3e96-4406-b96e-514bcd24510e",
+            "sourceColumn": "Code",
+            "summarizeBy": "count"
+          },
+          {
+            "name": "TarYYS",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "378fc47d-fa5d-4743-a794-7abed44c1e02",
+            "sourceColumn": "TarYYS",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "TarMMS",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "f963316c-5c96-4b48-965d-f98052354d68",
+            "sourceColumn": "TarMMS",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "TarDDS",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "2a6d5269-4e35-4198-b121-cb1fa21cd6d1",
+            "sourceColumn": "TarDDS",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "TimeS",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "1c417533-bf5e-47ed-bbb7-b649cd299d32",
+            "sourceColumn": "TimeS",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Beyaneh",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "b28bf4bd-d786-4fb5-82f2-29219156fc3f",
+            "sourceColumn": "Beyaneh",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "AccNum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "312b041b-c964-4021-b38c-50ef7c818335",
+            "sourceColumn": "AccNum",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Tip",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "6347437c-7e20-48de-83e0-cc6c7b23526b",
+            "sourceColumn": "Tip",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Maliat",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "21ae07c4-d2bf-43db-b0bb-b9e8463e7128",
+            "sourceColumn": "Maliat",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "MaliatDarsad",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "a3534252-2615-420c-8fe5-07c2a2e693b9",
+            "sourceColumn": "MaliatDarsad",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Kansel",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "6ba7df58-63e4-4cdc-84c5-0fe97b933fc8",
+            "sourceColumn": "Kansel",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "NameMiz",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "de8b23cf-8c9c-43fb-86a0-5771f82d6a39",
+            "sourceColumn": "NameMiz",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Serv",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "57cbbb5f-fe31-4080-b519-9d4fe6ddb9ae",
+            "sourceColumn": "Serv",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Nafarat",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "4e3feac9-59f8-44b6-a7e5-af8f986e869c",
+            "sourceColumn": "Nafarat",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "PricePey",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "72770381-c5ae-4964-9f98-acb857d8d06e",
+            "sourceColumn": "PricePey",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "MaliatPey",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "fdfc56d9-1c1f-405e-88f8-2f00df8a501e",
+            "sourceColumn": "MaliatPey",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "RezerveCode",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "38da4486-7ba3-4863-a431-773b6bb35714",
+            "sourceColumn": "RezerveCode",
+            "summarizeBy": "count"
+          },
+          {
+            "name": "RezerveName",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "4bf3484a-3027-4337-af60-d68ee24907bb",
+            "sourceColumn": "RezerveName",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Amount",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "908cc134-6bdb-40de-a36c-873ff6a80cde",
+            "sourceColumn": "Amount",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "RezervePrice",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "f1ae6e55-3b95-498f-93b7-b3ebf7928f7f",
+            "sourceColumn": "RezervePrice",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "RezerveDarsad",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "cb680ef2-0a7b-4ad0-aed7-843232dea027",
+            "sourceColumn": "RezerveDarsad",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "RezerveTakh",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "b813ac20-af73-4894-bdd9-e7e18070600a",
+            "sourceColumn": "RezerveTakh",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Gerd",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "d6efcd75-a1ff-43a7-954d-8667bf29f6c0",
+            "sourceColumn": "Gerd",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "EditFlag",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "cd4382a0-6fdd-4fa6-8230-84891e5356eb",
+            "sourceColumn": "EditFlag",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "LastEditName",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "751c8f81-0ed2-4cde-8317-479ac098fdc6",
+            "sourceColumn": "LastEditName",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "TimeTas",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "4d9872b8-0d96-4f67-8d0e-f7782fdfa2ab",
+            "sourceColumn": "TimeTas",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "TozPayment",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "c1a42165-bc73-43e7-b4df-30d10dba77c8",
+            "sourceColumn": "TozPayment",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "TransactionNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "93023732-f55a-4d92-8cf2-e0a7d73bcbdd",
+            "sourceColumn": "TransactionNo",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ErrorCodePay",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "8f192b69-bc1a-41f2-9867-da3f3151abf3",
+            "sourceColumn": "ErrorCodePay",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ErrorMessagePay",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "7b84850b-321a-409a-920e-51795aff8eb4",
+            "sourceColumn": "ErrorMessagePay",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "MerchantIDPay",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "e805db1c-e497-493b-ba2a-6f243cd59d18",
+            "sourceColumn": "MerchantIDPay",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "TerminalIDPay",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "bc5d79c4-6ac2-4ba8-b257-1e8a3095df25",
+            "sourceColumn": "TerminalIDPay",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "USSD",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "ea96676e-6a6d-44df-bd08-c3fd66702903",
+            "sourceColumn": "USSD",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "فروش ناخالص",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"fa-IR\"}"
+              }
+            ],
+            "dataType": "double",
+            "formatString": "#,0.00\"ريال\";#,0.00-\"ريال\";#,0.00\"ريال\"",
+            "lineageTag": "a3b67452-245e-476a-9085-332f43edb8e3",
+            "sourceColumn": "فروش ناخالص",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "PardPrice1",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "2bddc2aa-0614-4bcd-8b5a-a5fccbf121ac",
+            "sourceColumn": "PardPrice1",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "PardPrice2",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "58c8421c-1559-406c-860c-51813a0a511f",
+            "sourceColumn": "PardPrice2",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "PardPrice3",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "816253a2-3991-4c50-a357-e4e238e5a473",
+            "sourceColumn": "PardPrice3",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "PardPrice4",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "a362c266-39a6-47c7-bfba-d6c7c245e346",
+            "sourceColumn": "PardPrice4",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "BonPrint",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "5ee54247-f03c-439e-ac88-7915d5ce2670",
+            "sourceColumn": "BonPrint",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Pard1",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "8b2b3e26-e3f3-44c8-83a3-0064720ab4ac",
+            "sourceColumn": "Pard1",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "NamePard1",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "5ab44259-20ee-43b9-93c9-757dcb0c9e60",
+            "sourceColumn": "NamePard1",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Pard2",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "02a17fa5-4e91-49a2-9afa-fa1a1f162ffb",
+            "sourceColumn": "Pard2",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "NamePard2",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "ca8d088c-1d96-4b7f-a1df-207ae1db881a",
+            "sourceColumn": "NamePard2",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Pard3",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "711f7b0e-4d19-4d07-89cf-9e549abb0134",
+            "sourceColumn": "Pard3",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "NamePard3",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "73341d51-3b0d-4333-94b4-005ad9c8a20c",
+            "sourceColumn": "NamePard3",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Pard4",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "ece04fa1-7c8f-4b91-a89f-7ae350c30f4a",
+            "sourceColumn": "Pard4",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "NamePard4",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "6603ca32-49ae-4651-8033-cb008cf71794",
+            "sourceColumn": "NamePard4",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ReplyFlag",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "6da05d36-707c-4ef6-abef-4af308dcf88c",
+            "sourceColumn": "ReplyFlag",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Shekayat",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "e47d9deb-02b2-44cf-b9e6-9b0a1056a5c2",
+            "sourceColumn": "Shekayat",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "BranchCode",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "18bce9f6-09b6-4aee-baf7-89be236f41bd",
+            "sourceColumn": "BranchCode",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Bargasht",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "b6d9ca64-5145-4760-b7eb-b8d04053af42",
+            "sourceColumn": "Bargasht",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PrintIndex",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "ff852301-1d85-4bc2-9015-a746229be6a8",
+            "sourceColumn": "PrintIndex",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "ID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "e85abd05-3288-4915-94db-99d9e0a158ef",
+            "sourceColumn": "ID",
+            "summarizeBy": "count"
+          },
+          {
+            "name": "SefareshNumber",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "3e35a08f-c375-46de-849c-c248386e51a6",
+            "sourceColumn": "SefareshNumber",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "ClubFlag",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "8aae2178-9df3-4e9d-a4f2-e97719885b82",
+            "sourceColumn": "ClubFlag",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "CreditPersent",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "df9b5e7e-d5fa-41d8-a7c3-7b2d579c00bc",
+            "sourceColumn": "CreditPersent",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "CreditUsedPersent",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "797ac19f-39f9-4e06-b1ad-bd787f531111",
+            "sourceColumn": "CreditUsedPersent",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "CreditUsedRial",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "365f8098-3649-4c26-8d4f-03dcb8a3e939",
+            "sourceColumn": "CreditUsedRial",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "ClubCardNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "61acd5d7-d9f9-437a-9fcc-7fc93dfa6708",
+            "sourceColumn": "ClubCardNo",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Credit",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "2c1ef787-ceb8-49cc-99f1-77387769286f",
+            "sourceColumn": "Credit",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "UsedCredit",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "44f17c2d-b9d3-4f5a-b095-02fccfe99ac1",
+            "sourceColumn": "UsedCredit",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "NameOpCansel",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "cf678119-f075-41c3-b1e9-34110f7dd92b",
+            "sourceColumn": "NameOpCansel",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CodeRserve",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "2dff5b6a-628e-41fa-bc93-f226b1c29402",
+            "sourceColumn": "CodeRserve",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ClubUseCreditApiId",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "dba2d253-68fe-439c-b0a1-5daa983891bf",
+            "sourceColumn": "ClubUseCreditApiId",
+            "summarizeBy": "count"
+          },
+          {
+            "name": "SepidzReserveId",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "effb432d-1c4b-43ff-b2d0-7e0c990dcc6b",
+            "sourceColumn": "SepidzReserveId",
+            "summarizeBy": "count"
+          },
+          {
+            "name": "LastPrintNameOp",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "447486cd-1873-4a3b-82a0-9d9ea4c4494f",
+            "sourceColumn": "LastPrintNameOp",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "LastPrintAshNameOp",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "27e1d456-d9d7-488b-ad23-e63ca691e86b",
+            "sourceColumn": "LastPrintAshNameOp",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PrintKitchenTime",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "591fff3c-9200-4303-93f0-9e569d363ca6",
+            "sourceColumn": "PrintKitchenTime",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PrintTime",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "10d870a7-7ad3-4d6f-bf78-cecdabeeca56",
+            "sourceColumn": "PrintTime",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "OrginalTime",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "15d27622-774b-484d-9ed4-0b0516c79610",
+            "sourceColumn": "OrginalTime",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "inno",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "98a9f832-f017-4ad3-9a9e-73e31c399659",
+            "sourceColumn": "inno",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Takhfifan",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "ab3c7253-7b49-4b42-894f-87eff6410f84",
+            "sourceColumn": "Takhfifan",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Merged",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "599c63cd-4f8f-46c4-a2b6-fb9e1a28f234",
+            "sourceColumn": "Merged",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "be80d677-c469-40d5-b462-a52b1d2a0783",
+            "sourceColumn": "Date",
+            "summarizeBy": "none",
+            "variations": [
+              {
+                "name": "Variation",
+                "defaultHierarchy": {
+                  "hierarchy": "Date Hierarchy",
+                  "table": "LocalDateTable_ba7e36d2-1ac1-4bb4-aa84-c811f30f5245"
+                },
+                "isDefault": true,
+                "relationship": "db7fe471-b515-43aa-90e0-a6047b67c0b4"
+              }
+            ]
+          },
+          {
+            "name": "Merged.1",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "523ef4bf-b1b9-4587-b52e-39c6b31ac788",
+            "sourceColumn": "Merged.1",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "28781f53-d793-41c1-8a7d-676554148941",
+        "partitions": [
+          {
+            "name": "Salon1",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(\"172.20.21.11\", [CreateNavigationProperties=false]),",
+                "    DataCenter = Source{[Name=\"Restaurant\"]}[Data],",
+                "    dbo_Salon1 = DataCenter{[Schema=\"dbo\",Item=\"Salon1\"]}[Data],",
+                "    #\"Filtered Rows\" = Table.SelectRows(dbo_Salon1, each ([BranchCode] <> 26254)),",
+                "    #\"Duplicated Column\" = Table.DuplicateColumn(#\"Filtered Rows\", \"BranchCode\", \"BranchCode - Copy\"),",
+                "    #\"Duplicated Column1\" = Table.DuplicateColumn(#\"Duplicated Column\", \"Num\", \"Num - Copy\"),",
+                "    #\"Merged Columns\" = Table.CombineColumns(Table.TransformColumnTypes(#\"Duplicated Column1\", {{\"BranchCode - Copy\", type text}, {\"Num - Copy\", type text}}, \"en-US\"),{\"BranchCode - Copy\", \"Num - Copy\"},Combiner.CombineTextByDelimiter(\":\", QuoteStyle.None),\"Merged\"),",
+                "    #\"Duplicated Column2\" = Table.DuplicateColumn(#\"Merged Columns\", \"TarYY\", \"TarYY - Copy\"),",
+                "    #\"Duplicated Column3\" = Table.DuplicateColumn(#\"Duplicated Column2\", \"TarMM\", \"TarMM - Copy\"),",
+                "    #\"Duplicated Column4\" = Table.DuplicateColumn(#\"Duplicated Column3\", \"TarDD\", \"TarDD - Copy\"),",
+                "    #\"Merged Columns1\" = Table.CombineColumns(#\"Duplicated Column4\",{\"TarYY - Copy\", \"TarMM - Copy\", \"TarDD - Copy\"},Combiner.CombineTextByDelimiter(\"/\", QuoteStyle.None),\"Date\"),",
+                "    #\"Changed Type with Locale\" = Table.TransformColumnTypes(#\"Merged Columns1\", {{\"Date\", type date}}, \"fa-IR\"),",
+                "    #\"Duplicated Column5\" = Table.DuplicateColumn(#\"Changed Type with Locale\", \"NameMiz\", \"NameMiz - Copy\"),",
+                "    #\"Duplicated Column6\" = Table.DuplicateColumn(#\"Duplicated Column5\", \"BranchCode\", \"BranchCode - Copy\"),",
+                "    #\"Merged Columns2\" = Table.CombineColumns(Table.TransformColumnTypes(#\"Duplicated Column6\", {{\"BranchCode - Copy\", type text}}, \"en-US\"),{\"BranchCode - Copy\", \"NameMiz - Copy\"},Combiner.CombineTextByDelimiter(\":\", QuoteStyle.None),\"Merged.1\"),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Merged Columns2\",{{\"TarDD\", \"روز\"}, {\"TarMM\", \"ماه\"}, {\"TarYY\", \"سال\"}, {\"Roz\", \"روز هفته\"}, {\"PardNaghd\", \"فروش ناخالص\"}}),",
+                "    #\"Filtered Rows1\" = Table.SelectRows(#\"Renamed Columns\", each ([سال] <> \"-1\"))",
+                "in",
+                "    #\"Filtered Rows1\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "DateTableTemplate_4b86845b-46da-43dd-8382-9a38137b4ecc",
+        "annotations": [
+          {
+            "name": "__PBI_TemplateDateTable",
+            "value": "true"
+          },
+          {
+            "name": "DefaultItem",
+            "value": "DateHierarchy"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataCategory": "PaddedDateTableDates",
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "acf68739-0e65-48a2-a037-e28fa90bf545",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ],
+            "dataCategory": "Years",
+            "dataType": "int64",
+            "expression": "YEAR([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "f23c98a7-9878-4f99-aaad-8a253ddb190d",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "MonthNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ],
+            "dataCategory": "MonthOfYear",
+            "dataType": "int64",
+            "expression": "MONTH([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "54d3d055-ae70-41a6-bda9-6934c02fe8d8",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ],
+            "dataCategory": "Months",
+            "dataType": "string",
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "isHidden": true,
+            "lineageTag": "3a5fb4f0-47f6-49f4-8ce3-c01d1c5280f2",
+            "sortByColumn": "MonthNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "QuarterNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ],
+            "dataCategory": "QuarterOfYear",
+            "dataType": "int64",
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "e252a8db-6fd1-4c6e-8f19-2eeb5196d935",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Quarter",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ],
+            "dataCategory": "Quarters",
+            "dataType": "string",
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "isHidden": true,
+            "lineageTag": "37320981-fed4-4c5f-83e9-f8d3e8f25a19",
+            "sortByColumn": "QuarterNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Day",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ],
+            "dataCategory": "DayOfMonth",
+            "dataType": "int64",
+            "expression": "DAY([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "99148f6a-d096-49ab-b3b0-1070a310406a",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Date Hierarchy",
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ],
+            "levels": [
+              {
+                "name": "Year",
+                "column": "Year",
+                "lineageTag": "fb01bdf2-03ab-4420-ac8d-6bb1026ced36",
+                "ordinal": 0
+              },
+              {
+                "name": "Quarter",
+                "column": "Quarter",
+                "lineageTag": "24496903-120c-4592-af5c-1d17ba348f62",
+                "ordinal": 1
+              },
+              {
+                "name": "Month",
+                "column": "Month",
+                "lineageTag": "b810a894-2678-472b-87d2-19e845dc609a",
+                "ordinal": 2
+              },
+              {
+                "name": "Day",
+                "column": "Day",
+                "lineageTag": "99f722ad-d12a-4956-81ff-8b5d39003b00",
+                "ordinal": 3
+              }
+            ],
+            "lineageTag": "9e347a60-d6ce-4afe-8268-bf562135624a"
+          }
+        ],
+        "isHidden": true,
+        "isPrivate": true,
+        "lineageTag": "02ad7dda-655e-460d-b25c-5534d3934e0c",
+        "partitions": [
+          {
+            "name": "DateTableTemplate_4b86845b-46da-43dd-8382-9a38137b4ecc",
+            "mode": "import",
+            "source": {
+              "expression": "Calendar(Date(2015,1,1), Date(2015,1,1))",
+              "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Salon2",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Num",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "e11b16de-5835-4023-be2c-64bd59c64687",
+            "sourceColumn": "Num",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Radif",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "d1f6e80b-a3f9-46bb-a5e2-dd701c3cdd8a",
+            "sourceColumn": "Radif",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Flag",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "9c7ce469-f451-412b-b477-6b3fcc3f5827",
+            "sourceColumn": "Flag",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Code",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "f980a2e4-2441-4be9-99b9-b190ce2feb3d",
+            "sourceColumn": "Code",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "6a5e42ac-677c-43de-963d-66bebfe1157c",
+            "sourceColumn": "Name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Vahed",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "d8f1287b-5a04-4612-9280-3aa157a315ec",
+            "sourceColumn": "Vahed",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "تعداد آیتم",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isDecimal\":true}"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "DataType"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "0395081d-df41-47ee-a914-5c7ca34f2eac",
+            "sourceColumn": "تعداد آیتم",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Price",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"fa-IR\"}"
+              }
+            ],
+            "dataType": "double",
+            "formatString": "#,0\"ريال\";#,0-\"ريال\";#,0\"ريال\"",
+            "lineageTag": "342074b8-8ae7-4bd0-9c7b-797453702995",
+            "sourceColumn": "Price",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "فروش خالص",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"fa-IR\"}"
+              }
+            ],
+            "dataType": "double",
+            "formatString": "#,0\"ريال\";#,0-\"ريال\";#,0\"ريال\"",
+            "lineageTag": "46c979db-9205-4ba1-92e0-22abe1ff8b6e",
+            "sourceColumn": "فروش خالص",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Darsad",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "7b90bfdf-2918-4277-8d01-96d585b1cd50",
+            "sourceColumn": "Darsad",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "CodeT",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "c3d92aff-8328-44d7-9ff3-621c41de28ce",
+            "sourceColumn": "CodeT",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Toz",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "cbb83307-81b2-4338-b6cc-2eae235564b6",
+            "sourceColumn": "Toz",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PriceT",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "61e6c7ee-fc60-4c04-9132-500379991cf4",
+            "sourceColumn": "PriceT",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "ReplyFlag",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "7cb6aeef-862d-4e5e-9516-6972824cc97b",
+            "sourceColumn": "ReplyFlag",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "BranchCode",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "f7975f32-1706-48a2-abf2-0ffb1e89a677",
+            "sourceColumn": "BranchCode",
+            "summarizeBy": "count"
+          },
+          {
+            "name": "FactorID",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "57c57c5f-8944-4f47-a18b-4bcc5d880a16",
+            "sourceColumn": "FactorID",
+            "summarizeBy": "count"
+          },
+          {
+            "name": "IsMaliat",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "e0001921-f4cb-4182-a1b3-a06e10ec12f6",
+            "sourceColumn": "IsMaliat",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "MaliatDarsad",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "315bad61-e96e-4a55-afa3-1d2fe06ff98c",
+            "sourceColumn": "MaliatDarsad",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Merged",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "8e00897d-71db-4d7b-9bcb-89185ed70ddf",
+            "sourceColumn": "Merged",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Merged.1",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "d1bbefdb-a093-4b43-9642-1845d337f7e6",
+            "sourceColumn": "Merged.1",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "b2175dde-325c-4e1b-8efc-b8a1dba98d28",
+        "partitions": [
+          {
+            "name": "Salon2",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(\"172.20.21.11\", [CreateNavigationProperties=false]),",
+                "    DataCenter = Source{[Name=\"Restaurant\"]}[Data],",
+                "    dbo_Salon2 = DataCenter{[Schema=\"dbo\",Item=\"Salon2\"]}[Data],",
+                "    #\"Filtered Rows\" = Table.SelectRows(dbo_Salon2, each ([BranchCode] <> 26254)),",
+                "    #\"Duplicated Column\" = Table.DuplicateColumn(#\"Filtered Rows\", \"BranchCode\", \"BranchCode - Copy\"),",
+                "    #\"Duplicated Column1\" = Table.DuplicateColumn(#\"Duplicated Column\", \"Num\", \"Num - Copy\"),",
+                "    #\"Merged Columns\" = Table.CombineColumns(Table.TransformColumnTypes(#\"Duplicated Column1\", {{\"BranchCode - Copy\", type text}, {\"Num - Copy\", type text}}, \"en-US\"),{\"BranchCode - Copy\", \"Num - Copy\"},Combiner.CombineTextByDelimiter(\":\", QuoteStyle.None),\"Merged\"),",
+                "    #\"Duplicated Column2\" = Table.DuplicateColumn(#\"Merged Columns\", \"BranchCode\", \"BranchCode - Copy\"),",
+                "    #\"Duplicated Column3\" = Table.DuplicateColumn(#\"Duplicated Column2\", \"Code\", \"Code - Copy\"),",
+                "    #\"Merged Columns1\" = Table.CombineColumns(Table.TransformColumnTypes(#\"Duplicated Column3\", {{\"BranchCode - Copy\", type text}, {\"Code - Copy\", type text}}, \"en-US\"),{\"BranchCode - Copy\", \"Code - Copy\"},Combiner.CombineTextByDelimiter(\":\", QuoteStyle.None),\"Merged.1\"),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Merged Columns1\",{{\"SPrice\", \"فروش خالص\"}, {\"Ted\", \"تعداد آیتم\"}})",
+                "in",
+                "    #\"Renamed Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Miz",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Code",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "ff68394e-7910-4daf-b4c0-f092f1686b87",
+            "sourceColumn": "Code",
+            "summarizeBy": "count"
+          },
+          {
+            "name": "Name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "9220c3a8-3b73-421b-8838-357e0cdbd793",
+            "sourceColumn": "Name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "NameGroup",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "628ad0dd-c5e8-4e7f-99bb-1141bf533f6a",
+            "sourceColumn": "NameGroup",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CodeGroup",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "dc1e5f1a-f924-4ea5-9159-dd2da7f6fe01",
+            "sourceColumn": "CodeGroup",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "VIP",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "708da481-84fb-4a40-94af-dfec3bfd176e",
+            "sourceColumn": "VIP",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "ReplyFlag",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "759e1d81-52bf-4ea2-a794-8bc9384ff73f",
+            "sourceColumn": "ReplyFlag",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "BranchCode",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "506b554c-19c0-44ae-9c43-20ea40bcd120",
+            "sourceColumn": "BranchCode",
+            "summarizeBy": "count"
+          },
+          {
+            "name": "PrintIndex",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "e5efc1d6-f4c6-459d-a616-680dbdad1cf3",
+            "sourceColumn": "PrintIndex",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Merged",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "e0fcfb34-6bc3-4d01-bb7b-2bab92b31d2d",
+            "sourceColumn": "Merged",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Merged.1",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "1b005e86-4b5e-4e14-952d-10eea6d99efb",
+            "sourceColumn": "Merged.1",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "6c38beaf-8647-4205-9437-2149978a19f0",
+        "partitions": [
+          {
+            "name": "Miz",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(\"172.20.21.11\", [CreateNavigationProperties=false]),",
+                "    DataCenter = Source{[Name=\"Restaurant\"]}[Data],",
+                "    dbo_Miz = DataCenter{[Schema=\"dbo\",Item=\"Miz\"]}[Data],",
+                "    #\"Filtered Rows\" = Table.SelectRows(dbo_Miz, each ([BranchCode] = 26251 or [BranchCode] = 26252 or [BranchCode] = 26256)),",
+                "    #\"Duplicated Column\" = Table.DuplicateColumn(#\"Filtered Rows\", \"BranchCode\", \"BranchCode - Copy\"),",
+                "    #\"Duplicated Column1\" = Table.DuplicateColumn(#\"Duplicated Column\", \"Code\", \"Code - Copy\"),",
+                "    #\"Merged Columns\" = Table.CombineColumns(Table.TransformColumnTypes(#\"Duplicated Column1\", {{\"BranchCode - Copy\", type text}, {\"Code - Copy\", type text}}, \"en-US\"),{\"BranchCode - Copy\", \"Code - Copy\"},Combiner.CombineTextByDelimiter(\":\", QuoteStyle.None),\"Merged\"),",
+                "    #\"Duplicated Column2\" = Table.DuplicateColumn(#\"Merged Columns\", \"BranchCode\", \"BranchCode - Copy\"),",
+                "    #\"Duplicated Column3\" = Table.DuplicateColumn(#\"Duplicated Column2\", \"Name\", \"Name - Copy\"),",
+                "    #\"Merged Columns1\" = Table.CombineColumns(Table.TransformColumnTypes(#\"Duplicated Column3\", {{\"BranchCode - Copy\", type text}}, \"en-US\"),{\"BranchCode - Copy\", \"Name - Copy\"},Combiner.CombineTextByDelimiter(\":\", QuoteStyle.None),\"Merged.1\")",
+                "in",
+                "    #\"Merged Columns1\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "MizGroup",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Code",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "b45181ad-16e4-4431-a5e4-19213c274e5b",
+            "sourceColumn": "Code",
+            "summarizeBy": "count"
+          },
+          {
+            "name": "Name",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "d2118d18-c796-4b32-b906-e614365fe484",
+            "sourceColumn": "Name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Onvan",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "9498716d-a7c7-417d-bfea-ddbcd224d61c",
+            "sourceColumn": "Onvan",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Grouh",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "90b0ac15-d82f-45f5-9a74-ba38a3bdd4b7",
+            "sourceColumn": "Grouh",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "ReplyFlag",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "d6a86aab-ecd8-47e7-b512-702b7745bd51",
+            "sourceColumn": "ReplyFlag",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "BranchCode",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "ea9eaa61-18c6-45b1-8187-f6a0d1cbae12",
+            "sourceColumn": "BranchCode",
+            "summarizeBy": "count"
+          },
+          {
+            "name": "PrintIndex",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "f78f93f6-f146-467c-92d1-1dce93103723",
+            "sourceColumn": "PrintIndex",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Merged",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "6f581b05-1f8e-4359-92df-92c941653c80",
+            "sourceColumn": "Merged",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "02795462-9262-4ff8-89c8-5ea572a511dc",
+        "partitions": [
+          {
+            "name": "MizGroup",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(\"172.20.21.11\", [CreateNavigationProperties=false]),",
+                "    DataCenter = Source{[Name=\"Restaurant\"]}[Data],",
+                "    dbo_MizGroup = DataCenter{[Schema=\"dbo\",Item=\"MizGroup\"]}[Data],",
+                "    #\"Filtered Rows\" = Table.SelectRows(dbo_MizGroup, each ([BranchCode] = 26251 or [BranchCode] = 26252 or [BranchCode] = 26256)),",
+                "    #\"Duplicated Column\" = Table.DuplicateColumn(#\"Filtered Rows\", \"BranchCode\", \"BranchCode - Copy\"),",
+                "    #\"Duplicated Column1\" = Table.DuplicateColumn(#\"Duplicated Column\", \"Code\", \"Code - Copy\"),",
+                "    #\"Merged Columns\" = Table.CombineColumns(Table.TransformColumnTypes(#\"Duplicated Column1\", {{\"BranchCode - Copy\", type text}, {\"Code - Copy\", type text}}, \"en-US\"),{\"BranchCode - Copy\", \"Code - Copy\"},Combiner.CombineTextByDelimiter(\":\", QuoteStyle.None),\"Merged\")",
+                "in",
+                "    #\"Merged Columns\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Branch",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "BranchCode",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "e035c1d2-77eb-4946-93ff-82599ea3e0ce",
+            "sourceColumn": "BranchCode",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "BranchNAME",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "b0787571-5cfd-4e9a-a894-9c66e59954ee",
+            "sourceColumn": "BranchNAME",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Tel",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "0e54bbad-5cc6-4d86-a2ac-09f46211ce5f",
+            "sourceColumn": "Tel",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ReplyFlag",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "0b2ec4fe-92c1-464b-aa84-466a9d253983",
+            "sourceColumn": "ReplyFlag",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PreFixed",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "81fa7734-69b7-47de-89c6-c10eda4510e2",
+            "sourceColumn": "PreFixed",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ActiveAllBranch",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "boolean",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "lineageTag": "0d6ef5af-dfd3-4bca-8372-528e41faf4f3",
+            "sourceColumn": "ActiveAllBranch",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "BranchPercent",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "b38bf9a3-df0d-4bb3-82af-3e1b02a4478b",
+            "sourceColumn": "BranchPercent",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "MultiCash",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "boolean",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "lineageTag": "8a224928-0bc5-4324-9f41-cb52a076c75b",
+            "sourceColumn": "MultiCash",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "BrandCode",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "aa62b055-ff72-42d8-a744-5d282b2cbc7f",
+            "sourceColumn": "BrandCode",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "CountCash",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "8489b705-9ff2-40e8-843c-5ed4f9e0eebe",
+            "sourceColumn": "CountCash",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "DeActive",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "boolean",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\"",
+            "lineageTag": "25fdd50d-31b5-4073-88ad-7948b233d4bb",
+            "sourceColumn": "DeActive",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PreFixedCustomer",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "fa13784d-8de1-41b6-be47-2893a9ed605b",
+            "sourceColumn": "PreFixedCustomer",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "SmartWifiBranch",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "09a6931c-b7d4-4ba8-b847-b4a4d1ff9eec",
+            "sourceColumn": "SmartWifiBranch",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "PendingCount",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "502fd552-cf2d-479b-8330-db3188c8b7e7",
+            "sourceColumn": "PendingCount",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "41c65c1f-e858-4b57-91bc-299260656874",
+        "measures": [
+          {
+            "name": "وزن فاکتور",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"fa-IR\"}"
+              }
+            ],
+            "expression": [
+              "",
+              "DIVIDE(SUM('Salon2'[فروش خالص]), DISTINCTCOUNT('Salon2'[Num]))"
+            ],
+            "formatString": "#,0.00\"ريال\";#,0.00-\"ريال\";#,0.00\"ريال\"",
+            "lineageTag": "6b6e2465-be41-4827-848a-9eda257a8ff3"
+          },
+          {
+            "name": "وزن تعداد",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"currencyCulture\":\"fa-IR\"}"
+              }
+            ],
+            "expression": [
+              "",
+              "DIVIDE(SUM('Salon2'[فروش خالص]), SUM('Salon2'[تعداد آیتم]))"
+            ],
+            "formatString": "#,0.00\"ريال\";#,0.00-\"ريال\";#,0.00\"ريال\"",
+            "lineageTag": "f55c20cc-2248-4aa5-99ae-54739c23e61a"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Branch",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Sql.Databases(\"172.20.21.11\", [CreateNavigationProperties=false]),",
+                "    DataCenter = Source{[Name=\"Restaurant\"]}[Data],",
+                "    dbo_Branch = DataCenter{[Schema=\"dbo\",Item=\"Branch\"]}[Data],",
+                "    #\"Filtered Rows\" = Table.SelectRows(dbo_Branch, each ([BranchCode] = 26251 or [BranchCode] = 26252 or [BranchCode] = 26256))",
+                "in",
+                "    #\"Filtered Rows\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "LocalDateTable_ba7e36d2-1ac1-4bb4-aa84-c811f30f5245",
+        "annotations": [
+          {
+            "name": "__PBI_LocalDateTable",
+            "value": "true"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataCategory": "PaddedDateTableDates",
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "d9343d46-1b5f-4ca9-9b8c-a842d48bb02a",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ],
+            "dataCategory": "Years",
+            "dataType": "int64",
+            "expression": "YEAR([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "1c66eea8-c8f2-4fde-948b-a005ef8e14b3",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "MonthNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ],
+            "dataCategory": "MonthOfYear",
+            "dataType": "int64",
+            "expression": "MONTH([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "c99761ab-ad44-4a21-a630-39cf6a25853f",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ],
+            "dataCategory": "Months",
+            "dataType": "string",
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "isHidden": true,
+            "lineageTag": "c9baccc9-0874-4137-b224-73b6f95a85e7",
+            "sortByColumn": "MonthNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "QuarterNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ],
+            "dataCategory": "QuarterOfYear",
+            "dataType": "int64",
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "ab1069c7-3887-4cfa-9ee3-69545ab3038b",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Quarter",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ],
+            "dataCategory": "Quarters",
+            "dataType": "string",
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "isHidden": true,
+            "lineageTag": "1d7ca14e-3406-4897-9b89-870c9139f37f",
+            "sortByColumn": "QuarterNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Day",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ],
+            "dataCategory": "DayOfMonth",
+            "dataType": "int64",
+            "expression": "DAY([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "b9fd997c-7549-4df3-8294-28a51c9cb57f",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Date Hierarchy",
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ],
+            "levels": [
+              {
+                "name": "Year",
+                "column": "Year",
+                "lineageTag": "a9a51fde-79c1-4b36-ab05-4215d694de6e",
+                "ordinal": 0
+              },
+              {
+                "name": "Quarter",
+                "column": "Quarter",
+                "lineageTag": "09f9fa4c-1763-49db-a5f4-8beacd7604ea",
+                "ordinal": 1
+              },
+              {
+                "name": "Month",
+                "column": "Month",
+                "lineageTag": "80d4d827-76c5-4f21-871c-b88e01118881",
+                "ordinal": 2
+              },
+              {
+                "name": "Day",
+                "column": "Day",
+                "lineageTag": "fed1d270-da88-4605-8023-80ffc5ebb79c",
+                "ordinal": 3
+              }
+            ],
+            "lineageTag": "d56d0e76-f2de-4a4e-bf24-095ec50eceb7"
+          }
+        ],
+        "isHidden": true,
+        "lineageTag": "50d61dbf-0b9e-4ce3-92cd-350328c79872",
+        "partitions": [
+          {
+            "name": "LocalDateTable_ba7e36d2-1ac1-4bb4-aa84-c811f30f5245",
+            "mode": "import",
+            "source": {
+              "expression": "Calendar(Date(Year(MIN('Salon1'[Date])), 1, 1), Date(Year(MAX('Salon1'[Date])), 12, 31))",
+              "type": "calculated"
+            }
+          }
+        ],
+        "showAsVariationsOnly": true
+      },
+      {
+        "name": "The D Project Fereshte - 7 21 2024",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          }
+        ],
+        "columns": [
+          {
+            "name": "فعال",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "5c03eb51-28e9-413b-a134-75c0a5c4abd0",
+            "sourceColumn": "فعال",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "فعال در سايت",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "92c51df4-dfb6-4ee2-bced-8829a7b6c111",
+            "sourceColumn": "فعال در سايت",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "تحويلدار",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "8ac3b1b0-cf2d-457b-bef9-0f5d097d8350",
+            "sourceColumn": "تحويلدار",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "پرينتر 5",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "81397599-5ca6-4878-a760-07bda6da41a3",
+            "sourceColumn": "پرينتر 5",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "پرينتر 4",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "0ed305a7-9bdd-4abd-80a9-8791dc752d27",
+            "sourceColumn": "پرينتر 4",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "پرينتر 3",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "cd0ea244-225d-4632-b705-595ffacc80eb",
+            "sourceColumn": "پرينتر 3",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "پرينتر 2",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "116baa01-ca01-4a1c-acdd-61144913c7a4",
+            "sourceColumn": "پرينتر 2",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "پرينتر 1",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "2c82f966-af07-4624-8e3d-c318f47efbd9",
+            "sourceColumn": "پرينتر 1",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "قيمت واحد",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "679f0033-168a-4714-8223-6da2060393ed",
+            "sourceColumn": "قيمت واحد",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "واحد",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "62b9bbf6-25b3-4a03-86ae-f7c8f47389b8",
+            "sourceColumn": "واحد",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "نام لاتين",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "78ecb235-f1bd-4ab7-a60c-7af367858aaf",
+            "sourceColumn": "نام لاتين",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "نوع کالا",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "95fbc8fc-89ab-4ef3-a1f7-51140444f2ea",
+            "sourceColumn": "نوع کالا",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "نام فارسي",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "a04fecf1-c4a6-45a6-a642-f1363685d739",
+            "sourceColumn": "نام فارسي",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "كد كالا",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "5a4110f0-e665-406c-ad04-87d4b54f7816",
+            "sourceColumn": "كد كالا",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "تفضيلي",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "9395125f-61d4-42f8-93d0-3f05ca01068f",
+            "sourceColumn": "تفضيلي",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "بارکد 1",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "396db31d-2f57-4309-89df-60611860286e",
+            "sourceColumn": "بارکد 1",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "بارکد 2",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "3862205f-3ea7-4ce6-a90c-2964695cf1e9",
+            "sourceColumn": "بارکد 2",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "بارکد 3",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "f7cce6a7-caeb-421f-a24d-1af02932077f",
+            "sourceColumn": "بارکد 3",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "شناسه کالا",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "80435c61-7554-4597-874f-d4dd8dda6441",
+            "sourceColumn": "شناسه کالا",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Code",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "b2694094-1221-4d90-9183-c6e5256b240b",
+            "sourceColumn": "Code",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Branch",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "59411a6b-317c-4dcb-bbf7-4786708632a4",
+            "sourceColumn": "Branch",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "dd8145c3-719f-486e-9017-6fa9f66a555d",
+        "partitions": [
+          {
+            "name": "The D Project Fereshte - 7 21 2024",
+            "mode": "import",
+            "queryGroup": "لیست کالایی شعب",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Excel.Workbook(Web.Contents(\"https://www.dropbox.com/scl/fi/dblgoedgbu1zjtha4tn9y/List-Kalaei-The-D-Project-Fereshte-7.21.2024.xlsx?rlkey=9apnqn6twlfuhb72isbhmv7yz&st=bk0lzcf4&dl=1\"), null, true),",
+                "    Sheet1_Sheet = Source{[Item=\"Sheet1\",Kind=\"Sheet\"]}[Data],",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"فعال\", type text}, {\"فعال در سايت\", type text}, {\"تحويلدار\", type text}, {\"پرينتر 5\", type any}, {\"پرينتر 4\", type any}, {\"پرينتر 3\", type any}, {\"پرينتر 2\", type any}, {\"پرينتر 1\", type text}, {\"قيمت واحد\", Int64.Type}, {\"واحد\", type text}, {\"نام لاتين\", type text}, {\"نوع کالا\", type text}, {\"نام فارسي\", type text}, {\"كد كالا\", Int64.Type}, {\"تفضيلي\", type any}, {\"بارکد 1\", type any}, {\"بارکد 2\", type any}, {\"بارکد 3\", type any}, {\"شناسه کالا\", type any}, {\"Code\", Int64.Type}, {\"Branch\", type text}})",
+                "in",
+                "    #\"Changed Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
